@@ -7,10 +7,10 @@ const _: any = null
 
 describe('about ts types', () => {
   it('1-should compile to plain javascript', () => {
-    let boolean; // _
-    let integer; // _
-    let float; // _
-    let foo; // _
+    let boolean: boolean = true;
+    let integer: number = 6;
+    let float: number = Math.PI;
+    let foo: string = "bar";
     expect(boolean).to.be.true;
     expect(integer).to.equal(6);
     expect(float).to.equal(Math.PI);
@@ -18,12 +18,12 @@ describe('about ts types', () => {
   });
 
   it('2-should type arrays', () => {
-    let list; // _
-    expect(list.length).to.equal(2);
+    let list:any = 2;
+    expect(<number>list.length).to.equal(2);
   });
 
   it('3-should type tuples', () => {
-    let tupple; // _
+    let tupple:[number, string]; // _
     expect(tupple[0]).to.equal(42);
     expect(tupple[1]).to.equal('foo');
   });
