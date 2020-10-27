@@ -26,13 +26,19 @@ describe('about ts types', function () {
         expect(tupple[1]).to.equal('foo');
     });
     it('4-should type enums', function () {
-        var myAwesomeEnum = null; // _
+        var myAwesomeEnum;
+        (function (myAwesomeEnum) {
+            myAwesomeEnum[myAwesomeEnum["ACTIVE"] = 0] = "ACTIVE";
+            myAwesomeEnum[myAwesomeEnum[1] = 1] = 1;
+            myAwesomeEnum[myAwesomeEnum["INACTIVE"] = 2] = "INACTIVE";
+        })(myAwesomeEnum || (myAwesomeEnum = {}));
+        ;
         expect(myAwesomeEnum.ACTIVE).to.equal(0);
         expect(myAwesomeEnum[2]).to.equal('INACTIVE');
     });
     it('5-should type null and undefined', function () {
-        var nullVar; // _
-        var undefinedVar;
+        var nullVar = null; // _
+        var undefinedVar = undefined;
         expect(nullVar).to.be.null;
         expect(undefinedVar).to.be.undefined;
     });
@@ -40,13 +46,13 @@ describe('about ts types', function () {
         function sayHello(name) {
             return 'Hello '.concat(name);
         }
-        expect(sayHello('TypeScript')).to.equal(_); // replace the _
+        expect(sayHello('TypeScript')).to.equal('Hello TypeScript'); // replace the _
     });
     it('7-should infer the type', function () {
         function add(a, b) {
             return a + b;
         }
-        expect(add(17, '25')).to.equal(_); // replace the _
+        expect(add(17, '25')).to.equal('1725'); // replace the _
     });
 });
 //# sourceMappingURL=test.js.map

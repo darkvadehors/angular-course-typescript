@@ -23,20 +23,24 @@ describe('about ts types', () => {
   });
 
   it('3-should type tuples', () => {
-    let tupple:(number | string) = [42,'foo']; // _
+    let tupple: (number | string) = [ 42, 'foo' ]; // _
     expect(tupple[0]).to.equal(42);
     expect(tupple[1]).to.equal('foo');
   });
 
   it('4-should type enums', () => {
-    const myAwesomeEnum: any = null; // _
+    enum myAwesomeEnum  {
+      ACTIVE = 0,
+      1,
+      'INACTIVE'
+    }; 
     expect(myAwesomeEnum.ACTIVE).to.equal(0);
     expect(myAwesomeEnum[2]).to.equal('INACTIVE');
   });
 
   it('5-should type null and undefined', () => {
-    let nullVar; // _
-    let undefinedVar;
+    let nullVar: null = null; // _
+    let undefinedVar: undefined = undefined;
     expect(nullVar).to.be.null;
     expect(undefinedVar).to.be.undefined;
   });
@@ -45,13 +49,13 @@ describe('about ts types', () => {
     function sayHello(name) {
       return 'Hello '.concat(name);
     }
-    expect(sayHello('TypeScript')).to.equal( _ ); // replace the _
+    expect(sayHello('TypeScript')).to.equal('Hello TypeScript'); // replace the _
   });
 
   it('7-should infer the type', () => {
     function add(a, b) {
       return a + b;
     }
-    expect(add(17, '25')).to.equal( _ ); // replace the _
+    expect(add(17, '25')).to.equal('1725'); // replace the _
   });
 });
