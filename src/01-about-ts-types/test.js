@@ -17,11 +17,11 @@ describe('about ts types', function () {
         expect(foo).to.equal('bar');
     });
     it('2-should type arrays', function () {
-        var list = 2;
+        var list = [1, 2]; // _
         expect(list.length).to.equal(2);
     });
     it('3-should type tuples', function () {
-        var tupple; // _
+        var tupple = [42, 'foo']; // _
         expect(tupple[0]).to.equal(42);
         expect(tupple[1]).to.equal('foo');
     });

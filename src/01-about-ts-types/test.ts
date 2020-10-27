@@ -18,12 +18,12 @@ describe('about ts types', () => {
   });
 
   it('2-should type arrays', () => {
-    let list:any = 2;
-    expect(<number>list.length).to.equal(2);
+    let list:number[] = [1,2]; // _
+    expect(list.length).to.equal(2);
   });
 
   it('3-should type tuples', () => {
-    let tupple:[number, string]; // _
+    let tupple:(number | string) = [42,'foo']; // _
     expect(tupple[0]).to.equal(42);
     expect(tupple[1]).to.equal('foo');
   });
