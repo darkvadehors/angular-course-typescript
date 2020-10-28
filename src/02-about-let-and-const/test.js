@@ -13,8 +13,8 @@ describe('about let and const', function () {
             var myVar = 3;
             var myLet_1 = 4;
         }
-        expect(myVar).to.equal(_);
-        expect(myLet).to.equal(_);
+        expect(myVar).to.equal(3);
+        expect(myLet).to.equal(2);
     });
     it('2-should be only available in a for block scope', function () {
         var forLet = 0;
@@ -23,8 +23,8 @@ describe('about let and const', function () {
                 //do something
             }
         }
-        expect(forVar).to.equal(_);
-        expect(forLet).to.equal(_);
+        expect(forVar).to.equal(10);
+        expect(forLet).to.equal(0);
     });
     it('3-should solves some async issues', function (done) {
         var varStack = [];
@@ -39,8 +39,8 @@ describe('about let and const', function () {
             _loop_1(forLet);
         }
         setTimeout(function () {
-            expect(varStack).to.equal(_);
-            expect(letStack).to.equal(_);
+            expect(varStack).to.equal([3, 3, 3]);
+            expect(letStack).to.equal([]);
             done();
         });
     });
@@ -55,8 +55,8 @@ describe('about let and const', function () {
         catch (e) {
             error = true;
         }
-        expect(error).to.be.null; // _ (change null by ?)
-        expect(myConstObject.key).to.equal(_);
+        expect(error).to.be.false; // _ (change null by ?)
+        expect(myConstObject.key).to.equal('value');
     });
 });
 //# sourceMappingURL=test.js.map
