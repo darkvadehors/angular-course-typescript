@@ -1,5 +1,15 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
 var chai = require("chai");
 var expect = chai.expect;
 describe('about classes', function () {
@@ -10,8 +20,13 @@ describe('about classes', function () {
     }
     it('1-your first class', function () {
         var SuperHero = /** @class */ (function () {
-            function SuperHero() {
+            function SuperHero(a, b) {
+                this.a = a;
+                this.b = b;
             }
+            SuperHero.prototype.talk = function () {
+                return ("My favourite saying is : Hi my name is " + this.a + " " + this.b);
+            };
             return SuperHero;
         }()); // _
         var hero = new SuperHero('Bruce', 'Wayne');
@@ -19,7 +34,10 @@ describe('about classes', function () {
     });
     it('2-you can use getter and setters', function () {
         var Person = /** @class */ (function () {
-            function Person() {
+            function Person(first, last) {
+                this.first = first;
+                this.last = last;
+                this.fullName = this.first + ' ' + this.last;
             }
             return Person;
         }()); // _
@@ -30,8 +48,13 @@ describe('about classes', function () {
     });
     it('3-implement an interface', function () {
         var Developer = /** @class */ (function () {
-            function Developer() {
+            function Developer(favouriteLanguage) {
+                this.favouriteLanguage = favouriteLanguage;
+                this.favouriteLanguage = favouriteLanguage;
             }
+            Developer.prototype.sayHi = function () {
+                return ("Hello my favourite language is " + this.favouriteLanguage);
+            };
             return Developer;
         }()); // _
         var developer = new Developer('TypeScript');
@@ -48,11 +71,18 @@ describe('about classes', function () {
             };
             return SuperHero;
         }());
-        var Sidekick = /** @class */ (function () {
-            function Sidekick() {
+        var Sidekick = /** @class */ (function (_super) {
+            __extends(Sidekick, _super);
+            function Sidekick(name, ability, master) {
+                var _this = _super.call(this, name, ability) || this;
+                _this.master = master;
+                return _this;
             }
+            Sidekick.prototype.talk = function () {
+                return _super.prototype.talk.call(this) + " and my master is " + this.master.name;
+            };
             return Sidekick;
-        }()); // _
+        }(SuperHero)); // _
         var batman = new SuperHero('Batman', 'Martial arts');
         var robin = new Sidekick('Robin', 'Stick', batman);
         expect(robin.talk()).to.equal('I fight against evil with Stick and my master is Batman');
@@ -67,9 +97,10 @@ describe('about classes', function () {
             };
             return Developer;
         }());
-        var developer = new Developer('JavaScript');
-        expect(developer.sayHi.call(_))
-            .to.equal('Hello my favourite language is TypeScript');
+        var developer = new Developer('JavaScript'); // cette ligne ne lance pas la methode sayHi
+        // en faisant un appel call de la methode avec comme paramettre la class avec le params et la methode on cree un nouvelle instance dedevelopper avec le parametre Tapscript et on lance la methode sayHi
+        // new Developer('TypeScript').sayHi() => on aurait pu ecrire cela.
+        expect(developer.sayHi.call(new Developer('TypeScript'))).to.equal('Hello my favourite language is TypeScript');
     });
     it('6-mix it', function () {
         var BackDeveloper = /** @class */ (function () {
@@ -107,4 +138,3 @@ describe('about classes', function () {
             .to.equal('Hello I\'m a FrontDeveloper and I know JavaScript and TypeScript');
     });
 });
-//# sourceMappingURL=test.js.map

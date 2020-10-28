@@ -9,19 +9,46 @@ describe('about classes', () => {
   }
 
   it('1-your first class', () => {
-    class SuperHero { } // _
+    class SuperHero { 
+
+      private a:string;
+      private b:string;
+      
+      constructor(a,b){
+        this.a = a;
+        this.b = b;
+
+      }
+      talk():string{
+        return(`My favourite saying is : Hi my name is ${this.a} ${this.b}`);
+        
+      }
+    } // _
 
     var hero = new SuperHero('Bruce', 'Wayne');
     expect(hero.talk()).to.equal('My favourite saying is : Hi my name is Bruce Wayne');
   });
 
   it('2-you can use getter and setters', () => {
-    class Person { } // _
+    class Person {
+      private first:string,last:string;
+      public fullName:string;
+      constructor(first,last){
+        this.first = first;
+        this.last = last;
+        this.fullName = this.first + ' ' + this.last;
+      }
+
+      // fullName():string{
+      //   return(`${this.first} ${this.last}`);
+      // }
+     } // _
 
     var person = new Person('John', 'Doe');
     expect(person.fullName).to.equal('John Doe');
     person.fullName = 'Jane Doe';
     expect(person.fullName).to.equal('Jane Doe');
+
   });
 
   it('3-implement an interface', () => {
@@ -30,7 +57,15 @@ describe('about classes', () => {
       sayHi(): string;
     }
 
-    class Developer { } // _
+    class Developer implements IDeveloper{
+      
+      constructor(public favouriteLanguage:string){
+        this.favouriteLanguage = favouriteLanguage;
+      }
+      sayHi():string {
+        return(`Hello my favourite language is ${this.favouriteLanguage}`)
+      }
+     } // _
 
     var developer: IDeveloper = new Developer('TypeScript');
     expect(developer.sayHi()).to.equal('Hello my favourite language is TypeScript');
@@ -49,7 +84,15 @@ describe('about classes', () => {
       }
     }
 
-    class Sidekick { } // _
+    class Sidekick extends SuperHero { 
+      constructor(name:string, ability:string, private master: SuperHero){
+        super(name,ability);
+      }
+
+      talk(){
+        return super.talk() + ` and my master is ` + this.master.name;
+      }
+    } // _
 
     var batman = new SuperHero('Batman', 'Martial arts');
     var robin = new Sidekick('Robin', 'Stick', batman);
@@ -69,10 +112,13 @@ describe('about classes', () => {
       }
     }
 
-    var developer = new Developer('JavaScript');
-    expect(developer.sayHi.call( _ ))
-      .to.equal('Hello my favourite language is TypeScript');
+    var developer = new Developer('JavaScript'); // cette ligne ne lance pas la methode sayHi
+    // en faisant un appel call de la methode avec comme paramettre la class avec le params et la methode on cree un nouvelle instance dedevelopper avec le parametre Tapscript et on lance la methode sayHi
+    // new Developer('TypeScript').sayHi() => on aurait pu ecrire cela.
+
+    expect(developer.sayHi.call(new Developer('TypeScript'))).to.equal('Hello my favourite language is TypeScript');
   });
+
 
   it('6-mix it', () => {
     class BackDeveloper {

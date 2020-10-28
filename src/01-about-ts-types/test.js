@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var chai = require("chai");
 var expect = chai.expect;
 // The line below is just here to avoid TS error at compilation
@@ -11,7 +11,7 @@ describe('about ts types', function () {
         var integer = 6;
         var float = Math.PI;
         var foo = "bar";
-        expect(boolean).to.be.true;
+        expect(boolean).to.be["true"];
         expect(integer).to.equal(6);
         expect(float).to.equal(Math.PI);
         expect(foo).to.equal('bar');
@@ -39,7 +39,7 @@ describe('about ts types', function () {
     it('5-should type null and undefined', function () {
         var nullVar = null; // _
         var undefinedVar = undefined;
-        expect(nullVar).to.be.null;
+        expect(nullVar).to.be["null"];
         expect(undefinedVar).to.be.undefined;
     });
     it('6-should work in functions arguments too', function () {
@@ -55,4 +55,3 @@ describe('about ts types', function () {
         expect(add(17, '25')).to.equal('1725'); // replace the _
     });
 });
-//# sourceMappingURL=test.js.map

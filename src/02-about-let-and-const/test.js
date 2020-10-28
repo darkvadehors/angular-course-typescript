@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var chai = require("chai");
 var expect = chai.expect;
 // The line below is just here to avoid TS error at compilation
@@ -29,18 +29,21 @@ describe('about let and const', function () {
     it('3-should solves some async issues', function (done) {
         var varStack = [];
         var letStack = [];
-        for (var forVar = 0; forVar < 3; forVar++) {
+        var _loop_1 = function (forVar) {
             setTimeout(function () { return varStack.push(forVar); });
+        };
+        for (var forVar = 0; forVar < 3; forVar++) {
+            _loop_1(forVar);
         }
-        var _loop_1 = function (forLet) {
+        var _loop_2 = function (forLet) {
             setTimeout(function () { return letStack.push(forLet); });
         };
         for (var forLet = 0; forLet < 3; forLet++) {
-            _loop_1(forLet);
+            _loop_2(forLet);
         }
         setTimeout(function () {
             expect(varStack).to.equal([3, 3, 3]);
-            expect(letStack).to.equal([]);
+            expect(letStack).to.equal([0, 1, 2]);
             done();
         });
     });
@@ -55,8 +58,7 @@ describe('about let and const', function () {
         catch (e) {
             error = true;
         }
-        expect(error).to.be.false; // _ (change null by ?)
+        expect(error).to.be["false"]; // _ (change null by ?)
         expect(myConstObject.key).to.equal('value');
     });
 });
-//# sourceMappingURL=test.js.map

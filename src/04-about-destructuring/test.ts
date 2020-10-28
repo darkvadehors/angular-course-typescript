@@ -3,25 +3,26 @@ var expect = chai.expect;
 
 describe('about destructuring arrays', () => {
   it('1-should extract value from array', () => {
-    let firstValue = [1]; // _
+    let [firstValue] = [1]; // _
+    //[firstvalue : 1]
     expect(firstValue).to.equal(1);
   });
 
   it('2-should swap two variables, in one operation', () => {
     let [x, y] = ['ax', 'why'];
-    [x, y] = [x, y];
+    [x, y] = [y, x];
     expect([x, y]).to.eql(['why', 'ax']); // _
   });
 
   it('3-should count leading commas', () => {
     const all = ['ax', 'why', 'zet'];
     const [,z] = all;
-    expect(z).to.equal('zet'); // _
+    expect(z).to.equal('why'); // _
   });
 
   it('4-should extract from nested arrays', () => {
     const user = [['Some', 'One'], 23];
-    const [firstName, surname, age] = user; // _
+    const [[firstName, surname], age] = user; // _
 
     expect(`${firstName} ${surname} = ${age} years`).to.equal('Some One = 23 years');
   });
@@ -56,7 +57,7 @@ describe('about destructuring objects', () => {
   });
 
   it('4-should mix array and object', () => {
-    const [, {lang}] = [null, [{ env: 'browser', lang: 'ES6' }]]; // _
+    const [, [{env,lang}]] = [null, [{ env: 'browser', lang: 'ES6' }]]; // _
     expect(lang).to.equal('ES6');
   });
 

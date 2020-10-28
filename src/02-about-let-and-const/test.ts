@@ -34,7 +34,7 @@ describe('about let and const', () => {
   it('3-should solves some async issues', (done) => {
     var varStack: number[] = [];
     var letStack: number[] = [];
-    for (var forVar = 0; forVar < 3; forVar++) {
+    for (let forVar = 0; forVar < 3; forVar++) {
       setTimeout(() => varStack.push(forVar));
     }
 
@@ -44,7 +44,7 @@ describe('about let and const', () => {
 
     setTimeout(() => {
       expect(varStack).to.equal( [3,3,3] );
-      expect(letStack).to.equal( []);
+      expect(letStack).to.equal( [0,1,2]);
       done();
     });
   });

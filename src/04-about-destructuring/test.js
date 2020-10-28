@@ -1,26 +1,27 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var chai = require("chai");
 var expect = chai.expect;
 describe('about destructuring arrays', function () {
     it('1-should extract value from array', function () {
-        var firstValue = [1]; // _
+        var firstValue = [1][0]; // _
+        //[firstvalue : 1]
         expect(firstValue).to.equal(1);
     });
     it('2-should swap two variables, in one operation', function () {
         var _a;
         var _b = ['ax', 'why'], x = _b[0], y = _b[1];
-        _a = [x, y], x = _a[0], y = _a[1];
+        _a = [y, x], x = _a[0], y = _a[1];
         expect([x, y]).to.eql(['why', 'ax']); // _
     });
     it('3-should count leading commas', function () {
         var all = ['ax', 'why', 'zet'];
         var z = all[1];
-        expect(z).to.equal('zet'); // _
+        expect(z).to.equal('why'); // _
     });
     it('4-should extract from nested arrays', function () {
         var user = [['Some', 'One'], 23];
-        var firstName = user[0], surname = user[1], age = user[2]; // _
+        var _a = user[0], firstName = _a[0], surname = _a[1], age = user[1]; // _
         expect(firstName + " " + surname + " = " + age + " years").to.equal('Some One = 23 years');
     });
     it('5-should chain assignments', function () {
@@ -51,7 +52,7 @@ describe('about destructuring objects', function () {
         expect(x).to.equal(42); // _
     });
     it('4-should mix array and object', function () {
-        var _a = [null, [{ env: 'browser', lang: 'ES6' }]], lang = _a[1].lang; // _
+        var _a = [null, [{ env: 'browser', lang: 'ES6' }]], _b = _a[1][0], env = _b.env, lang = _b.lang; // _
         expect(lang).to.equal('ES6');
     });
     it('5-should missing refs become undefined ?', function () {
@@ -63,4 +64,3 @@ describe('about destructuring objects', function () {
         expect(substr).to.equal(String.prototype.substr);
     });
 });
-//# sourceMappingURL=test.js.map
